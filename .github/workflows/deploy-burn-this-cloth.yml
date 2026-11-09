@@ -1,0 +1,30 @@
+
+name: Deploy Burn This Cloth
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'web/burn-this-cloth/**'
+      - '.github/workflows/deploy-burn-this-cloth.yml'
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout creative-coding
+        uses: actions/checkout@v4
+
+      - name: Deploy to Burn This Cloth
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          external_repository: ramedhis/burn-this-cloth
+          publish_branch: gh-pages
+          publish_dir: ./web/burn-this-cloth/
+          force_orphan: true
+

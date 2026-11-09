@@ -1,0 +1,30 @@
+
+name: Deploy Text Phobia
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'web/text-phobia/**'
+      - '.github/workflows/deploy-text-phobia.yml'
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout creative-coding
+        uses: actions/checkout@v4
+
+      - name: Deploy to Text Phobia
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          external_repository: ramedhis/text-phobia
+          publish_branch: gh-pages
+          publish_dir: ./web/text-phobia/
+          force_orphan: true
+
