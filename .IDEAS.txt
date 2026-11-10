@@ -1,0 +1,9 @@
+IDEAS:
+------
+
+1. Siri-like orb for post-recording voice visualization -- used for
+   future content making voice-over visualization. Make a dev_log
+   about it for a content!
+2. Another typography/text web-app where you can simulate text breaking
+   up when get hit/thrown into another text -- collision-like physics but
+   using typography as medium.
