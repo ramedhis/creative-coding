@@ -1,0 +1,67 @@
+setcps(0.4) // 96 bpm, 1 cycle = 2.5s. Full loop = 12 cycles = 30s
+
+const mood = (lo, hi, offset) => sine.range(lo, hi).slow(12).late(offset)
+
+// Ambience:
+calm: note("<[d3,a3,e4,f4] [bb2,f3,d4,c4] [g2,d3,bb3,a3] [a2,e3,g3,d4]>/3")
+  .s("sine")
+  .fm(sine.range(0.5, 3).slow(12))
+  .fmh(2)
+  .lpf(mood(500, 1600, 0))
+  .attack(1.2).release(2.5)
+  .pan(sine.range(0.35, 0.65).slow(6))
+  .gain(mood(0.12, 0.3, 0))
+  .room(0.8).size(4)
+
+// Pulse:
+bubbles: n("0 3 ~ 5 2 ~ 4 7 ~ 2 5 ~ 3 6 4 ~")
+  .scale("D5:minor pentatonic")
+  .s("sine")
+  .penv(12).pdecay(0.04)
+  .decay(0.12).sustain(0)
+  .lpf(mood(1500, 5000, 4))
+  .gain(mood(0.1, 0.3, 4))
+  .pan(sine.range(0.2, 0.8).fast(2))
+  .delay(0.45).delaytime(0.47).delayfeedback(0.5)
+  .room(0.5).size(3)
+
+// Bass:
+fight: note("<d2 bb1 g1 a1>/3")
+  .s("sawtooth")
+  .struct("x(11,16)")
+  .lpf(mood(250, 2400, 8))
+  .lpq(8)
+  .decay(0.14).sustain(0)
+  .distort(0.4)
+  .gain(mood(0.05, 0.28, 8))
+  .room(0.3)
+
+// Clicks:
+neuronsL: note("a6")
+  .s("sine")
+  .struct("x(5,16)")
+  .decay(0.03).sustain(0)
+  .pan(0.2)
+  .gain(0.12)
+  .delay(0.4).delaytime(0.23).delayfeedback(0.45)
+
+neuronsR: note("e6")
+  .s("sine")
+  .struct("x(3,8,1)")
+  .decay(0.03).sustain(0)
+  .pan(0.8)
+  .gain(0.12)
+  .delay(0.4).delaytime(0.35).delayfeedback(0.45)
+
+// Noise:
+slosh: s("brown")
+  .lpf(sine.range(250, 1200).slow(3))
+  .hpf(100)
+  .gain(0.1)
+  .room(0.6)
+
+// Beat:
+heart: s("bd:2")
+  .struct("x ~ ~ ~ ~ ~ x ~")
+  .lpf(140)
+  .gain(0.35)

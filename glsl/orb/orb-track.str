@@ -1,0 +1,49 @@
+setcps(8/30) // 64 bpm, 1 cycle = 3.75s. Full loop = 8 cycles = 30s
+
+// Soft pad:
+pad: note("<[d3,a3,e4,f4] [bb2,f3,c4,d4]>/4")
+  .s("triangle")
+  .lpf(sine.range(400, 1100).slow(8))
+  .attack(3).release(4)
+  .pan(sine.range(0.4, 0.6).slow(8))
+  .gain(0.22)
+  .room(0.9).size(6)
+
+// Droplets:
+drops: note("<[d5 ~ ~ ~ a5 ~ ~ ~ ~ ~ f5 ~ ~ ~ ~ ~] [~ ~ ~ ~ e5 ~ ~ ~ c5 ~ ~ ~ ~ ~ ~ ~]>")
+  .s("sine")
+  .decay(0.7).sustain(0)
+  .lpf(3500)
+  .gain(0.2)
+  .pan(sine.range(0.3, 0.7).slow(4))
+  .delay(0.55).delaytime(0.7).delayfeedback(0.6)
+  .room(0.9).size(6)
+
+// Sub swell:
+sub: note("<d2 bb1>/4")
+  .s("sine")
+  .lpf(120)
+  .gain(sine.range(0.12, 0.38).slow(4))
+
+// Air:
+air: s("pink")
+  .lpf(sine.range(300, 800).slow(8))
+  .hpf(150)
+  .gain(0.04)
+  .room(0.7)
+
+// Soft pulse:
+pulse: note("d4")
+  .s("sine")
+  .struct("x")
+  .decay(0.5).sustain(0)
+  .gain(0.06)
+  .room(0.9).size(6)
+
+// Gentle ticks:
+ticks: s("bd*8")
+  .bank("tr909")
+  .gain("[.15 .20]*2")
+  .hpf(7000)
+  .pan(sine.range(0.5, 1.2).fast(3))
+  .room(0.4)
